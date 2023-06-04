@@ -113,4 +113,18 @@
         items: 1
     });
 
+    //typing animation
+    var options = {
+        stringsElement: '.typed-text',
+        typeSpeed: 100,
+        loop: true,
+        loopCount: Infinity,
+        showCursor: false,
+        fadeOut: true,
+        fadeOutClass: 'typed-fade-out',
+        fadeOutDelay: 500
+      };
+      var typed = new Typed('.typed-text-output', options);
 })(jQuery);
+
+
