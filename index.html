@@ -37,13 +37,12 @@
         </button>
         <div class="collapse navbar-collapse px-lg-3" id="navbarCollapse">
             <div class="navbar-nav m-auto py-0">
-                <a href="#home" class="nav-item nav-link active">Home</a>
-                <a href="#about" class="nav-item nav-link">About</a>
-                <a href="#skill" class="nav-item nav-link">Skill</a>
-                <a href="#qualification" class="nav-item nav-link">Qualification</a>
-                <a href="#service" class="nav-item nav-link">Service</a>
-                <a href="#portfolio" class="nav-item nav-link">Portfolio</a>
-                <a href="#contact" class="nav-item nav-link">Contact</a>
+                <a href="#home" class="nav-item nav-link active"><section>Home</section></a>
+                <a href="#about" class="nav-item nav-link"><section>About</section></a>
+                <a href="#skill" class="nav-item nav-link"><section>Skill</section></a>
+                <a href="#qualification" class="nav-item nav-link"><section>Qualification</section></a>
+                <a href="#service" class="nav-item nav-link"><section>Service</section></a>
+                <a href="#portfolio" class="nav-item nav-link"><section>Portofolio </section></a>
             </div>
             <a href="https://drive.google.com/drive/folders/1ChXYzomgxC-23BhfGgLT-PAwnBLOAxyF"
                 class="btn btn-menu btn-outline-primary d-none d-lg-block">Download CV </a>
@@ -443,27 +442,33 @@
                             </form>
                         </div>
                         <!--Notification Form-->
-                        <script>
+                    <script>
                         const scriptURL = 'https://script.google.com/macros/s/AKfycbxl0wibprVNfmCJ-3XF6TY54MK6DoiosGS9E2uoAtRUpYcpmyGTnEgb2Bg-BGob3gBO/exec';
                         const form = document.forms['google-sheets'];
 
                         form.addEventListener('submit', e => {
-                            e.preventDefault();
-                            fetch(scriptURL, { method: 'POST', body: new FormData(form) })
-                                .then(response => {
-                                    if (response.ok) {
-                                        // Display success notification on the web page
-                                        displayNotification('Success!', 'Form submitted successfully.');
-                                    } else {
+                                e.preventDefault();
+
+                                // Mengirim data form ke server
+                                fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+                                    .then(response => {
+                                        if (response.ok) {
+                                            // Display success notification on the web page
+                                            displayNotification('Success!', 'Form submitted successfully.');
+
+                                            // Mengosongkan nilai input setelah form dikirim
+                                            form.reset();
+                                        } else {
+                                            // Display error notification on the web page
+                                            displayNotification('Error!', 'An error occurred while submitting the form.');
+                                        }
+                                    })
+                                    .catch(error => {
                                         // Display error notification on the web page
-                                        displayNotification('Error!', 'An error occurred while submitting the form.');
-                                    }
-                                })
-                                .catch(error => {
-                                    // Display error notification on the web page
-                                    displayNotification('Error!', error.message);
-                                });
-                        });
+                                        displayNotification('Error!', error.message);
+                                    });
+                            });
+
 
                         function displayNotification(title, message) {
                             // Check if the browser supports Web Notifications
